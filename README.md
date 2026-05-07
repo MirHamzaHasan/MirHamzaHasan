@@ -1,51 +1,65 @@
-md <div align="center">  # ⚡ Mir Hamza Hasan  ### AI Systems Engineer • Web3 Infrastructure • Backend Architect • Game Technology  <img src="https://readme-typing-svg.herokuapp.com?font=Space+Grotesk&size=30&duration=3000&pause=1000&color=8A2BE2&center=true&vCenter=true&width=1000&lines=Building+AI-Powered+Systems;Rust+%2B+Blockchain+Infrastructure;Game+Development+%2B+Automation;Scaling+Ideas+Into+Products" />  <br>  <p align="center">   <a href="https://linkedin.com/in/mirhamzahasan">     <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/>   </a>    <a href="https://x.com/MirHamzaHasan">     <img src="https://img.shields.io/badge/X-000000?style=for-the-badge&logo=x&logoColor=white"/>   </a>    <a href="mailto:mirahamzahasan@gmail.com">     <img src="https://img.shields.io/badge/Gmail-EA4335?style=for-the-badge&logo=gmail&logoColor=white"/>   </a> </p>  <img src="https://komarev.com/ghpvc/?username=MirHamzaHasan&style=for-the-badge&color=8A2BE2"/>  </div>  ---  # 🧠 About Me  yaml
-name: Mir Hamza Hasan
+<div align="center">
 
+# ⚡ Mir Hamza Hasan
+
+### AI Systems Engineer • Web3 Infrastructure • Backend Architect • Game Technology
+
+<img src="https://readme-typing-svg.herokuapp.com?font=Space+Grotesk&size=30&duration=3000&pause=1000&color=8A2BE2&center=true&vCenter=true&width=1000&lines=Building+AI-Powered+Systems;Rust+%2B+Blockchain+Infrastructure;Game+Development+%2B+Automation;Scaling+Ideas+Into+Products" />
+
+<br>
+
+<p align="center">
+  <a href="https://linkedin.com/in/mirhamzahasan">
+    <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/>
+  </a>
+
+  <a href="https://x.com/MirHamzaHasan">
+    <img src="https://img.shields.io/badge/X-000000?style=for-the-badge&logo=x&logoColor=white"/>
+  </a>
+
+  <a href="mailto:mirahamzahasan@gmail.com">
+    <img src="https://img.shields.io/badge/Gmail-EA4335?style=for-the-badge&logo=gmail&logoColor=white"/>
+  </a>
+</p>
+
+<img src="https://komarev.com/ghpvc/?username=MirHamzaHasan&style=for-the-badge&color=8A2BE2"/>
+
+</div>
+
+---
+
+# 🧠 About Me
+
+```yaml
+name: Mir Hamza Hasan
 location: Dubai, UAE 🇦🇪
 
 roles:
-  [
-    "AI Systems Engineer",
-    "Blockchain Infrastructure Developer",
-    "Backend Engineer",
-    "Game Developer",
-    "Technical Founder"
-  ]
+  - AI Systems Engineer
+  - Blockchain Infrastructure Developer
+  - Backend Engineer
+  - Game Developer
+  - Technical Founder
 
-current_focus:
-  [
-    "AI Developer Tools",
-    "Realtime Blockchain Infrastructure",
-    "Rust Backend Systems",
-    "AI Agents & Automation",
-    "Unity Tooling",
-    "Scalable SaaS Products"
-  ]
+focus:
+  - AI Developer Tools
+  - Rust Backend Systems
+  - Blockchain Infrastructure
+  - AI Agents & Automation
+  - Realtime Systems
+  - Scalable SaaS Products
 
 currently_building:
-  [
-    "AI Level Designer",
-    "TradeBlocks",
-    "AI Content OS",
-    "Realtime Indexing Systems"
-  ]
+  - AI Level Designer
+  - TradeBlocks
+  - AI Content OS
+  - Blockchain Indexing Systems
 
 experience:
-  [
-    "Games with millions of installs",
-    "Mobile & desktop applications",
-    "Web3 systems & automation",
-    "Full-stack product development"
-  ]
-
-currently_learning:
-  [
-    "Advanced Rust",
-    "Distributed Systems",
-    "LangGraph & AI Agents",
-    "Trading Infrastructure",
-    "Scalable Architectures"
-  ]
+  - Games with millions of installs
+  - Web3 systems & automation
+  - Mobile & desktop applications
+  - Full-stack product development
 ```
 
 ---
@@ -54,13 +68,14 @@ currently_learning:
 
 <table>
 <tr>
+
 <td width="33%">
 
 ## 🎮 AI Level Designer
 
 Multi-LLM powered Unity plugin for generating playable 2D levels using natural language prompts.
 
-### Stack
+**Stack**  
 Unity • C# • OpenAI • Claude • Gemini • DeepSeek
 
 </td>
@@ -71,7 +86,7 @@ Unity • C# • OpenAI • Claude • Gemini • DeepSeek
 
 Realtime blockchain analytics & AI-assisted trading infrastructure platform.
 
-### Stack
+**Stack**  
 Rust • Node.js • Kafka • PostgreSQL • WebSockets
 
 </td>
@@ -82,10 +97,11 @@ Rust • Node.js • Kafka • PostgreSQL • WebSockets
 
 AI-powered multi-platform content automation & publishing engine.
 
-### Stack
-AI Agents • React • Automation • APIs • Scheduling
+**Stack**  
+AI Agents • Automation • React • APIs
 
 </td>
+
 </tr>
 </table>
 
@@ -115,18 +131,8 @@ AI Agents • React • Automation • APIs • Scheduling
 
 <br><br>
 
-### Blockchain & Web3
-<img src="https://skillicons.dev/icons?i=solidity"/>
-
-<br><br>
-
 ### Game Development
 <img src="https://skillicons.dev/icons?i=unity,blender"/>
-
-<br><br>
-
-### Tools & Workflow
-<img src="https://skillicons.dev/icons?i=git,github,githubactions,postman,notion"/>
 
 </div>
 
@@ -148,26 +154,15 @@ AI Agents • React • Automation • APIs • Scheduling
 
 ---
 
-# 🏆 What I Like Building
+# 🏆 Current Focus
 
 - AI-powered developer tooling
 - Blockchain infrastructure
-- Realtime systems
+- Rust backend systems
+- Realtime architectures
 - Automation pipelines
-- Trading systems
-- Scalable backend architectures
-- Procedural game systems
-- Mobile & desktop products
-
----
-
-# 🎯 Current Mission
-
-- Build production-grade AI systems
-- Scale open-source tooling
-- Push deeper into Rust & distributed systems
-- Combine AI + Web3 + Automation into real products
-- Build systems that scale globally
+- AI agents & workflows
+- Game technology
 
 ---
 
@@ -188,4 +183,3 @@ AI Agents • React • Automation • APIs • Scheduling
 AI Systems • Backend Engineering • Web3 Infrastructure • Technical Partnerships • Remote Opportunities
 
 </div>
-``
