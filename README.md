@@ -1,136 +1,191 @@
-# <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="35"> Hey, I'm Mir Hamza Hasan
+md <div align="center">  # ⚡ Mir Hamza Hasan  ### AI Systems Engineer • Web3 Infrastructure • Backend Architect • Game Technology  <img src="https://readme-typing-svg.herokuapp.com?font=Space+Grotesk&size=30&duration=3000&pause=1000&color=8A2BE2&center=true&vCenter=true&width=1000&lines=Building+AI-Powered+Systems;Rust+%2B+Blockchain+Infrastructure;Game+Development+%2B+Automation;Scaling+Ideas+Into+Products" />  <br>  <p align="center">   <a href="https://linkedin.com/in/mirhamzahasan">     <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/>   </a>    <a href="https://x.com/MirHamzaHasan">     <img src="https://img.shields.io/badge/X-000000?style=for-the-badge&logo=x&logoColor=white"/>   </a>    <a href="mailto:mirahamzahasan@gmail.com">     <img src="https://img.shields.io/badge/Gmail-EA4335?style=for-the-badge&logo=gmail&logoColor=white"/>   </a> </p>  <img src="https://komarev.com/ghpvc/?username=MirHamzaHasan&style=for-the-badge&color=8A2BE2"/>  </div>  ---  # 🧠 About Me  yaml
+name: Mir Hamza Hasan
 
-### AI Systems • Web3 Infrastructure • Backend Engineering • Game Technology
+location: Dubai, UAE 🇦🇪
 
-Building scalable systems across AI, blockchain, automation, and game development.
+roles:
+  [
+    "AI Systems Engineer",
+    "Blockchain Infrastructure Developer",
+    "Backend Engineer",
+    "Game Developer",
+    "Technical Founder"
+  ]
+
+current_focus:
+  [
+    "AI Developer Tools",
+    "Realtime Blockchain Infrastructure",
+    "Rust Backend Systems",
+    "AI Agents & Automation",
+    "Unity Tooling",
+    "Scalable SaaS Products"
+  ]
+
+currently_building:
+  [
+    "AI Level Designer",
+    "TradeBlocks",
+    "AI Content OS",
+    "Realtime Indexing Systems"
+  ]
+
+experience:
+  [
+    "Games with millions of installs",
+    "Mobile & desktop applications",
+    "Web3 systems & automation",
+    "Full-stack product development"
+  ]
+
+currently_learning:
+  [
+    "Advanced Rust",
+    "Distributed Systems",
+    "LangGraph & AI Agents",
+    "Trading Infrastructure",
+    "Scalable Architectures"
+  ]
+```
 
 ---
 
-# 🚀 Current Focus
+# 🚀 Featured Projects
 
-- AI-powered developer tooling
-- Blockchain infrastructure & trading systems
-- Rust backend engineering
-- AI agents & automation pipelines
-- Unity tooling & procedural generation
-- Mobile games & publishing systems
+<table>
+<tr>
+<td width="33%">
 
----
+## 🎮 AI Level Designer
 
-# 🧠 About Me
+Multi-LLM powered Unity plugin for generating playable 2D levels using natural language prompts.
 
-- 🎮 Shipped games with millions of installs
-- ⚡ Building AI-assisted development systems
-- 🦀 Learning advanced Rust & distributed architectures
-- 🔗 Deep interest in Web3 infrastructure & real-time systems
-- 🤖 Exploring autonomous AI workflows & agent orchestration
-- 🛠 Founder-minded engineer focused on scalable products
+### Stack
+Unity • C# • OpenAI • Claude • Gemini • DeepSeek
 
----
+</td>
 
-# 🤝 Open To
+<td width="33%">
 
-- AI infrastructure collaboration
-- Backend & distributed systems
-- Web3 tooling & trading platforms
-- Unity tooling / procedural systems
-- Open-source projects
-- Startup partnerships
+## 📈 TradeBlocks
 
----
+Realtime blockchain analytics & AI-assisted trading infrastructure platform.
 
-# 🌐 Connect With Me
+### Stack
+Rust • Node.js • Kafka • PostgreSQL • WebSockets
 
-<p align="left">
-<a href="https://linkedin.com/in/mirhamzahasan" target="_blank">
-<img src="https://skillicons.dev/icons?i=linkedin" height="45"/>
-</a>
-<a href="https://x.com/MirHamzaHasan" target="_blank">
-<img src="https://skillicons.dev/icons?i=twitter" height="45"/>
-</a>
-<a href="mailto:mirahamzahasan@gmail.com">
-<img src="https://skillicons.dev/icons?i=gmail" height="45"/>
-</a>
-</p>
+</td>
+
+<td width="33%">
+
+## 🤖 Content OS
+
+AI-powered multi-platform content automation & publishing engine.
+
+### Stack
+AI Agents • React • Automation • APIs • Scheduling
+
+</td>
+</tr>
+</table>
 
 ---
 
 # ⚒️ Core Tech Stack
 
-## Languages
-<p>
-<img src="https://skillicons.dev/icons?i=rust,ts,js,python,cs,solidity" />
-</p>
+<div align="center">
 
-## Frontend & Mobile
-<p>
-<img src="https://skillicons.dev/icons?i=react,nextjs,redux,electron,tauri,expo,vite" />
-</p>
+### Languages
+<img src="https://skillicons.dev/icons?i=rust,ts,js,python,cs,solidity"/>
 
-## Backend & Infrastructure
-<p>
-<img src="https://skillicons.dev/icons?i=nodejs,fastapi,redis,postgres,mongodb,mysql,docker,kubernetes,nginx" />
-</p>
+<br><br>
 
-## Cloud & DevOps
-<p>
-<img src="https://skillicons.dev/icons?i=aws,gcp,cloudflare,firebase,vercel" />
-</p>
+### Frontend & Mobile
+<img src="https://skillicons.dev/icons?i=react,nextjs,redux,electron,tauri,expo,vite"/>
 
-## Game Development
-<p>
-<img src="https://skillicons.dev/icons?i=unity,blender" />
-</p>
+<br><br>
 
-## Tools
-<p>
-<img src="https://skillicons.dev/icons?i=git,github,githubactions,postman,notion" />
-</p>
+### Backend & Infrastructure
+<img src="https://skillicons.dev/icons?i=nodejs,fastapi,redis,postgres,mongodb,mysql,docker,kubernetes,nginx"/>
 
----
+<br><br>
 
-# 📌 Featured Projects
+### Cloud & DevOps
+<img src="https://skillicons.dev/icons?i=aws,gcp,cloudflare,firebase,vercel"/>
 
-### 🎮 AI Level Designer
-Multi-LLM powered Unity plugin for generating playable 2D levels using natural language prompts.
+<br><br>
 
-### 📈 TradeBlocks
-AI-assisted trading & blockchain infrastructure platform focused on real-time data systems and automation.
+### Blockchain & Web3
+<img src="https://skillicons.dev/icons?i=solidity"/>
 
-### 🤖 Content OS
-Automation system for multi-platform AI-driven content workflows and publishing pipelines.
+<br><br>
+
+### Game Development
+<img src="https://skillicons.dev/icons?i=unity,blender"/>
+
+<br><br>
+
+### Tools & Workflow
+<img src="https://skillicons.dev/icons?i=git,github,githubactions,postman,notion"/>
+
+</div>
 
 ---
 
 # 📊 GitHub Analytics
 
-<p align="center">
-<img height="170" src="https://github-readme-stats.vercel.app/api?username=MirHamzaHasan&show_icons=true&theme=tokyonight&hide_border=true&count_private=true"/>
-<img height="170" src="https://github-readme-stats.vercel.app/api/top-langs/?username=MirHamzaHasan&layout=compact&theme=tokyonight&hide_border=true&hide=cpp,c%2B%2B,c"/>
-</p>
+<div align="center">
 
-<p align="center">
-<img src="https://streak-stats.demolab.com?user=MirHamzaHasan&theme=tokyonight&hide_border=true"/>
-</p>
+<img height="180em" src="https://github-readme-stats.vercel.app/api?username=MirHamzaHasan&show_icons=true&theme=tokyonight&hide_border=true&count_private=true&rank_icon=github"/>
+
+<img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=MirHamzaHasan&layout=compact&theme=tokyonight&hide_border=true&hide=cpp,c%2B%2B,c"/>
+
+<br><br>
+
+<img width="75%" src="https://streak-stats.demolab.com?user=MirHamzaHasan&theme=tokyonight&hide_border=true"/>
+
+</div>
 
 ---
 
-# 🏆 Goals
+# 🏆 What I Like Building
+
+- AI-powered developer tooling
+- Blockchain infrastructure
+- Realtime systems
+- Automation pipelines
+- Trading systems
+- Scalable backend architectures
+- Procedural game systems
+- Mobile & desktop products
+
+---
+
+# 🎯 Current Mission
 
 - Build production-grade AI systems
-- Contribute heavily to open source
-- Scale developer-focused SaaS products
-- Push deeper into Rust & systems engineering
-- Build next-generation AI tooling for creators & developers
+- Scale open-source tooling
+- Push deeper into Rust & distributed systems
+- Combine AI + Web3 + Automation into real products
+- Build systems that scale globally
 
 ---
 
 # ⚡ Philosophy
 
-> Build systems. Automate workflows. Ship products. Iterate relentlessly.
+<div align="center">
+
+### “Build systems that scale beyond your own time.”
+
+</div>
 
 ---
 
-<p align="center">
-<img src="https://komarev.com/ghpvc/?username=MirHamzaHasan&style=for-the-badge&color=blueviolet"/>
-</p>
+<div align="center">
+
+## 🤝 Open To
+
+AI Systems • Backend Engineering • Web3 Infrastructure • Technical Partnerships • Remote Opportunities
+
+</div>
+``
