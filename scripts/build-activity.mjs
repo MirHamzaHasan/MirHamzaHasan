@@ -63,7 +63,7 @@ const peak = weeks.findIndex((w) => w.total === busiest);
 const beacon = (i, delay) => {
   const cx = n(left + i * step + barW / 2);
   const cy = n(horizon - heightOf(weeks[i].total) - 9);
-  return `<g class="top" style="animation-delay:${n(i * 0.03)}s"><circle class="b motion-only" style="animation-delay:${delay}s" cx="${cx}" cy="${cy}" r="11" fill="url(#beacon)"/><circle cx="${cx}" cy="${cy}" r="3" fill="${C.sand}"/></g>`;
+  return `<g class="top" style="animation-delay:${n(i * 0.03)}s"><circle class="b calm" style="animation-delay:${delay}s" cx="${cx}" cy="${cy}" r="11" fill="url(#beacon)"/><circle cx="${cx}" cy="${cy}" r="3" fill="${C.sand}"/></g>`;
 };
 
 let months = '';
@@ -111,6 +111,8 @@ const defs =
   `<linearGradient id="water" gradientUnits="userSpaceOnUse" x1="0" y1="${horizon}" x2="0" y2="${horizon + 48}"><stop offset="0" stop-color="${C.ember}" stop-opacity=".5"/><stop offset="1" stop-color="${C.ember}" stop-opacity="0"/></linearGradient>` +
   `<radialGradient id="dusk" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="${C.ember}" stop-opacity=".42"/><stop offset="1" stop-color="${C.ember}" stop-opacity="0"/></radialGradient>` +
   `<radialGradient id="beacon"><stop offset="0" stop-color="${C.sand}"/><stop offset=".3" stop-color="${C.ember}" stop-opacity=".7"/><stop offset="1" stop-color="${C.ember}" stop-opacity="0"/></radialGradient>` +
+  `<pattern id="rows" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="translate(0 ${horizon % 10})"><rect y="2" width="10" height="8" fill="#fff"/></pattern>` +
+  `<mask id="blocks" maskUnits="userSpaceOnUse" x="0" y="0" width="${W}" height="${horizon}"><rect width="${W}" height="${horizon}" fill="url(#rows)"/></mask>` +
   `<clipPath id="frame"><rect width="${W}" height="${H}" rx="24"/></clipPath>`;
 
 svg('activity', {
@@ -121,9 +123,9 @@ svg('activity', {
   defs,
   body:
     ground(W, H) +
-    `<g clip-path="url(#frame)"><ellipse class="g" cx="${W / 2}" cy="${horizon}" rx="${W * 0.72}" ry="170" fill="url(#dusk)"/>` +
+    `<g clip-path="url(#frame)"><ellipse class="g calm" cx="${W / 2}" cy="${horizon}" rx="${W * 0.72}" ry="170" fill="url(#dusk)"/>` +
     statsSvg +
-    towers +
+    `<g mask="url(#blocks)">${towers}</g>` +
     `<rect x="0" y="${horizon}" width="${W}" height="2" fill="${C.ember}" opacity=".7"/>` +
     water +
     beacon(peak, 0) +

@@ -1,6 +1,6 @@
 <div align="center">
 
-<img width="100%" src="assets/hero.svg" alt="Mir Hamza Hasan. I build AI-powered products that feel alive. An animated line jumps across game platforms, climbs a market chart and fires an AI network." />
+<img width="100%" src="assets/hero.svg" alt="Mir Hamza Hasan. I build AI-powered products that feel alive. A pixel-art hero collects coins across game platforms, mines a chain of blocks and fires an AI network." />
 
 <br /><br />
 
@@ -19,6 +19,14 @@ I like turning rough ideas into shipped products: tools that save time, games th
 I've shipped mobile games with **millions of installs**. Now I'm focused on AI-powered developer tools, realtime blockchain systems, and products people actually enjoy using.
 
 <br clear="right" />
+
+## Game dev
+
+<img width="100%" src="assets/game.svg" alt="Game dev: Unity tools, procedural systems and mobile games with millions of installs. A pixel-art hero runs through an endless level past a Dubai skyline, jumping slimes and collecting coins." />
+
+## Blockchain
+
+<img width="100%" src="assets/chain.svg" alt="Blockchain: Solana and EVM smart contracts. Transactions fly from the mempool into a new block, its hash is mined, the block seals and the chain moves along." />
 
 ## What I'm building
 

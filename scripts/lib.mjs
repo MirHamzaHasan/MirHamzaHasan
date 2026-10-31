@@ -30,6 +30,8 @@ export const F = {
   display: load('big-shoulders-display/files/big-shoulders-display-latin-800-normal.woff'),
   body: load('hanken-grotesk/files/hanken-grotesk-latin-400-normal.woff'),
   medium: load('hanken-grotesk/files/hanken-grotesk-latin-600-normal.woff'),
+  pixel: load('press-start-2p/files/press-start-2p-latin-400-normal.woff'),
+  mono: load('jetbrains-mono/files/jetbrains-mono-latin-500-normal.woff'),
 };
 
 const n = (v) => +v.toFixed(2);
@@ -98,13 +100,14 @@ export function wrap(str, font, size, maxWidth) {
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
 
-// Every file holds still for people who ask for reduced motion. Base styles are
-// always the finished frame, so stopping the animations leaves a complete image.
+// People who ask for reduced motion keep fades and glows (class `calm`) but lose
+// anything that travels. Base styles are the finished frame, so what stops still
+// leaves a complete image.
 export function svg(name, { w, h, title, css = '', defs = '', body }) {
   const out =
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" role="img">` +
     `<title>${esc(title)}</title>` +
-    `<style>${css}@media (prefers-reduced-motion:reduce){*{animation:none!important}.motion-only{display:none}}</style>` +
+    `<style>${css}@media (prefers-reduced-motion:reduce){*:not(.calm){animation:none!important}.motion-only{display:none}}</style>` +
     (defs ? `<defs>${defs}</defs>` : '') +
     body +
     `</svg>\n`;

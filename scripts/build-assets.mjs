@@ -1,271 +1,11 @@
-// Builds the hand-drawn SVGs: hero, profile card, focus panels, stack, buttons, CTA.
+// Builds the hand-drawn SVGs: scenes, focus panels, stack, buttons, CTA.
 // Run once after changing copy. The activity skyline has its own script.
 import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { C, F, glyphPath, ground, layout, n, outline, skyGradient, svg, text, widthOf, wrap } from './lib.mjs';
-
-const pct = (v) => `${n(v)}%`;
-
-/* ---------- Hero: one line through games, markets and AI ---------- */
-function hero() {
-  const W = 1200;
-  const H = 590;
-  const dur = 15;
-  const start = 1.3; // the loop waits for the name to land
-  const travelFrom = 3;
-  const travelTo = 66;
-
-  // The runner's path, as points with a spin value for the jumps.
-  const pts = [{ x: 56, y: 450, r: 0 }];
-  let spin = 0;
-  const runTo = (x, y) => pts.push({ x, y, r: spin });
-  const jumpTo = (x2, y2, apex) => {
-    const { x: x1, y: y1 } = pts[pts.length - 1];
-    const cy = 2 * apex - (y1 + y2) / 2;
-    for (let i = 1; i <= 14; i++) {
-      const t = i / 14;
-      pts.push({
-        x: x1 + (x2 - x1) * t,
-        y: (1 - t) ** 2 * y1 + 2 * t * (1 - t) * cy + t ** 2 * y2,
-        r: spin + t * 180,
-      });
-    }
-    spin += 180;
-  };
-
-  runTo(170, 450);
-  jumpTo(232, 408, 352);
-  runTo(322, 408);
-  jumpTo(386, 450, 362);
-  runTo(470, 450);
-
-  const closes = [434, 446, 412, 392, 416, 374, 352, 372, 338, 318, 338, 306, 296];
-  const candleX = closes.map((_, i) => 490 + i * 28);
-  closes.forEach((y, i) => runTo(candleX[i], y));
-  const input = { x: 884, y: 300 };
-  runTo(input.x, input.y);
-
-  let length = 0;
-  pts.forEach((p, i) => {
-    if (i) length += Math.hypot(p.x - pts[i - 1].x, p.y - pts[i - 1].y);
-    p.l = length;
-  });
-  const toPct = (l) => travelFrom + (travelTo - travelFrom) * (l / length);
-  const pctAtX = (x) => toPct(pts.find((p) => p.x >= x).l);
-  const d = 'M' + pts.map((p) => `${n(p.x)} ${n(p.y)}`).join('L');
-
-  let css = '';
-  let id = 0;
-  // A tiny per-element keyframe: dark until the runner arrives, then on.
-  const switchOn = (at, from = 'opacity:0', to = 'opacity:1', rise = 1.6) => {
-    const name = `k${id++}`;
-    css += `@keyframes ${name}{0%,${pct(at)}{${from}}${pct(at + rise)},100%{${to}}}`;
-    return `animation:${name} ${dur}s linear ${start}s infinite both`;
-  };
-
-  // Platforms
-  const platforms = [
-    [56, 170, 450],
-    [232, 322, 408],
-    [386, 470, 450],
-  ];
-  let ghost = '';
-  let lit = '';
-  const blockBottom = 500;
-  for (const [a, b, y] of platforms) {
-    ghost += `<rect x="${a}" y="${y}" width="${b - a}" height="${blockBottom - y}" fill="${C.plum}"/>`;
-    for (let col = a; col < b; col += 28) {
-      const w = Math.min(28, b - col) - 2;
-      for (let row = y + 4; row < blockBottom; row += 24) {
-        ghost += `<rect x="${col}" y="${row}" width="${w}" height="20" fill="${C.dusk}" opacity=".5"/>`;
-      }
-      const at = pctAtX(Math.max(col, a + 1));
-      lit += `<rect style="${switchOn(at)}" x="${col}" y="${y}" width="${w}" height="5" fill="${C.sand}"/>`;
-    }
-  }
-
-  // Coins hang at the top of each jump and vanish when collected.
-  for (const [x, y] of [[201, 344], [354, 356], [430, 416]]) {
-    const at = pctAtX(x);
-    const name = `k${id++}`;
-    css += `@keyframes ${name}{0%,${pct(at)}{transform:scale(1);opacity:1}${pct(at + 1.2)}{transform:scale(2);opacity:0}100%{transform:scale(2);opacity:0}}`;
-    ghost += `<circle cx="${x}" cy="${y}" r="9" fill="none" stroke="${C.dusk}" stroke-width="2"/>`;
-    lit += `<g class="motion-only" style="animation:${name} ${dur}s linear ${start}s infinite both;transform-box:fill-box;transform-origin:center"><circle cx="${x}" cy="${y}" r="9" fill="${C.sand}"/><rect x="${x - 2}" y="${y - 5}" width="4" height="10" rx="1" fill="${C.amber}"/></g>`;
-  }
-
-  // Candles grow as the price line reaches them.
-  closes.forEach((close, i) => {
-    const open = i ? closes[i - 1] : 450;
-    const x = candleX[i];
-    const up = close < open;
-    const top = Math.min(open, close);
-    const h = Math.max(Math.abs(open - close), 4);
-    const color = up ? C.sand : C.ember;
-    const wick = `<rect x="${x - 1}" y="${top - 12}" width="2" height="${h + 24}"`;
-    const body = `<rect x="${x - 8}" y="${top}" width="16" height="${h}" rx="2"`;
-    ghost += `${wick} fill="${C.dusk}"/>${body} fill="${C.dusk}"/>`;
-    lit += `<g style="${switchOn(pctAtX(x))}">${wick} fill="${color}"/>${body} fill="${color}"/></g>`;
-  });
-
-  // The network fires layer by layer after the runner is absorbed.
-  const layers = [
-    [input],
-    [{ x: 974, y: 300 }, { x: 974, y: 385 }, { x: 974, y: 470 }],
-    [{ x: 1062, y: 300 }, { x: 1062, y: 385 }, { x: 1062, y: 470 }],
-    [{ x: 1144, y: 385 }],
-  ];
-  const fireAt = [travelTo, travelTo + 4, travelTo + 8, travelTo + 12];
-  layers.forEach((layer, li) => {
-    if (li < layers.length - 1) {
-      for (const a of layer) {
-        for (const b of layers[li + 1]) {
-          const mid = (a.x + b.x) / 2;
-          const edge = `M${a.x} ${a.y}C${mid} ${a.y} ${mid} ${b.y} ${b.x} ${b.y}`;
-          ghost += `<path d="${edge}" fill="none" stroke="${C.dusk}" stroke-width="2"/>`;
-          const style = switchOn(fireAt[li], 'stroke-dashoffset:1', 'stroke-dashoffset:0', 4);
-          lit += `<path style="${style}" d="${edge}" pathLength="1" stroke-dasharray="1 1" fill="none" stroke="url(#heatLine)" stroke-width="2.5"/>`;
-        }
-      }
-    }
-    const last = li === layers.length - 1;
-    for (const p of layer) {
-      const r = last ? 17 : 11;
-      ghost += `<circle cx="${p.x}" cy="${p.y}" r="${r}" fill="${C.night}" stroke="${C.dusk}" stroke-width="2"/>`;
-      lit += `<circle style="${switchOn(fireAt[li] + (li ? 4 : 0), 'opacity:0', 'opacity:1', 1)}" cx="${p.x}" cy="${p.y}" r="${r}" fill="${last ? C.ember : C.amber}"/>`;
-    }
-  });
-  const out = layers[3][0];
-  const ringAt = fireAt[3] + 4;
-  css += `@keyframes ring{0%,${pct(ringAt)}{transform:scale(.6);opacity:0}${pct(ringAt + 1)}{opacity:.9}${pct(ringAt + 12)},100%{transform:scale(3);opacity:0}}`;
-  lit += `<circle class="motion-only" style="animation:ring ${dur}s ease-out ${start}s infinite both;transform-box:fill-box;transform-origin:center" cx="${out.x}" cy="${out.y}" r="18" fill="none" stroke="${C.sand}" stroke-width="2.5"/>`;
-
-  // Travel keyframes: runner, the bright line, and the band of heat in the name.
-  const frames = (fn) => pts.map((p) => `${pct(toPct(p.l))}{${fn(p)}}`).join('');
-  const hold = (first, last) => `0%{${first}}${pct(travelTo)},100%{${last}}`;
-  const end = pts[pts.length - 1];
-  css += `@keyframes line{${hold('stroke-dashoffset:1', 'stroke-dashoffset:0')}${pct(travelFrom)}{stroke-dashoffset:1}}`;
-  const runner = (p) => `transform:translate(${n(p.x)}px,${n(p.y)}px) rotate(${n(p.r)}deg)`;
-  css += `@keyframes runner{0%{${runner(pts[0])};opacity:0}${frames((p) => `${runner(p)};opacity:1`)}${pct(travelTo + 0.4)},100%{${runner(end)};opacity:0}}`;
-  css += `@keyframes heat{0%{transform:translateX(-340px)}${frames((p) => `transform:translateX(${n(p.x - 170)}px)`)}${pct(travelTo + 8)},100%{transform:translateX(1240px)}}`;
-  css += `@keyframes world{0%,92%{opacity:1}99%,100%{opacity:0}}`;
-  css += `@keyframes land{from{transform:translateY(46px);opacity:0}to{transform:none;opacity:1}}`;
-  css += `@keyframes fade{from{opacity:0}to{opacity:1}}`;
-  css += `.lit{animation:world ${dur}s linear ${start}s infinite both}`;
-  css += `.line{animation:line ${dur}s linear ${start}s infinite both}`;
-  css += `.runner{opacity:0;animation:runner ${dur}s linear ${start}s infinite both}`;
-  css += `.band{opacity:1;animation:heat ${dur}s linear ${start}s infinite both}`;
-  css += `.tag{animation:fade 1s ease-out .75s both}`;
-  css += `.ltr{animation:land .75s cubic-bezier(.16,1,.3,1) both}`;
-
-  // The name fills the width, letter by letter.
-  const label = 'MIR HAMZA HASAN';
-  const size = 1088 / (widthOf(label, F.display, 100) / 100);
-  const baseline = 186;
-  const set = layout(label, F.display, size);
-  let letters = '';
-  let i = 0;
-  for (const { g, x, char } of set.glyphs) {
-    if (char === ' ') continue;
-    const path = glyphPath(g, 56 + x, baseline, size);
-    letters += `<path class="ltr" style="animation-delay:${n(i * 0.045)}s" fill="${C.mist}" d="${path}"/>`;
-    i++;
-  }
-  const nameD = outline(label, { font: F.display, size, x: 56, y: baseline });
-
-  const zone = (str, x, at) =>
-    text(str, { font: F.medium, size: 30, x, y: 552, fill: C.haze }) +
-    `<g class="lit"><g style="${switchOn(at)}">${text(str, { font: F.medium, size: 30, x, y: 552, fill: C.sand })}</g></g>`;
-
-  const defs =
-    skyGradient('sky', '#3C1A44') +
-    `<radialGradient id="dusk"><stop offset="0" stop-color="${C.ember}" stop-opacity=".22"/><stop offset="1" stop-color="${C.ember}" stop-opacity="0"/></radialGradient>` +
-    `<radialGradient id="halo"><stop offset="0" stop-color="${C.amber}" stop-opacity=".75"/><stop offset="1" stop-color="${C.amber}" stop-opacity="0"/></radialGradient>` +
-    `<linearGradient id="heatLine" gradientUnits="userSpaceOnUse" x1="56" y1="0" x2="1144" y2="0"><stop offset="0" stop-color="${C.ember}"/><stop offset=".55" stop-color="${C.amber}"/><stop offset="1" stop-color="${C.sand}"/></linearGradient>` +
-    `<linearGradient id="heatBand"><stop offset="0" stop-color="${C.ember}" stop-opacity="0"/><stop offset=".3" stop-color="${C.ember}"/><stop offset=".5" stop-color="${C.sand}"/><stop offset=".7" stop-color="${C.amber}"/><stop offset="1" stop-color="${C.amber}" stop-opacity="0"/></linearGradient>` +
-    `<clipPath id="nameClip"><path d="${nameD}"/></clipPath>` +
-    `<clipPath id="frame"><rect width="${W}" height="${H}" rx="24"/></clipPath>`;
-
-  svg('hero', {
-    w: W,
-    h: H,
-    title:
-      'Mir Hamza Hasan. I build AI-powered products that feel alive. A single animated line jumps across game platforms, climbs a market chart and fires an AI network.',
-    css,
-    defs,
-    body:
-      ground(W, H) +
-      `<g clip-path="url(#frame)"><ellipse cx="${W / 2}" cy="${H}" rx="${W * 0.7}" ry="260" fill="url(#dusk)"/>` +
-      letters +
-      `<g class="motion-only" clip-path="url(#nameClip)"><rect class="band" x="0" y="0" width="340" height="220" fill="url(#heatBand)"/></g>` +
-      text('I build AI-powered products that feel alive.', {
-        font: F.body,
-        size: 37,
-        x: 58,
-        y: 244,
-        cls: 'tag',
-        fill: C.mist,
-      }) +
-      ghost +
-      `<path d="${d}" fill="none" stroke="${C.dusk}" stroke-width="3" stroke-linejoin="round"/>` +
-      `<g class="lit">${lit}<path class="line" d="${d}" pathLength="1" stroke-dasharray="1 1" fill="none" stroke="url(#heatLine)" stroke-width="4" stroke-linejoin="round"/></g>` +
-      `<g class="runner motion-only"><circle r="30" fill="url(#halo)"/><rect x="-9" y="-9" width="18" height="18" rx="3" fill="${C.mist}"/></g>` +
-      zone('Games', 56, pctAtX(60)) +
-      zone('Markets', 490, pctAtX(490)) +
-      zone('AI systems', 884, travelTo) +
-      `</g>`,
-  });
-}
-
-/* ---------- Player card ---------- */
-function profile() {
-  const W = 680;
-  const rows = [
-    ['Name', 'Mir Hamza Hasan'],
-    ['Base', 'Dubai, UAE'],
-    ['Class', 'Builder and engineer'],
-    ['Mode', 'Ship fast. Learn faster.'],
-    ['Focus', 'AI × Games × Web3'],
-    ['Energy', 'Happy game-dev chaos'],
-  ];
-  const top = 150;
-  const rowH = 64;
-  const H = top + rows.length * rowH - 14;
-  let body = '';
-  rows.forEach(([key, value], i) => {
-    const y = top + i * rowH;
-    if (i) body += `<rect x="40" y="${y - 44}" width="${W - 80}" height="2" fill="${C.dusk}" opacity=".6"/>`;
-    body += text(key, { font: F.body, size: 28, x: 40, y, fill: C.haze });
-    body += text(value, { font: F.medium, size: 30, x: 170, y, fill: C.mist });
-  });
-
-  // The energy meter never settles, like the row it sits next to.
-  let meter = '';
-  for (let i = 0; i < 7; i++) {
-    meter += `<rect class="m" style="animation-delay:${n(-i * 0.37)}s;animation-duration:${n(0.9 + ((i * 7) % 5) * 0.17)}s" x="${W - 40 - (7 - i) * 11}" y="${top + 5 * rowH - 26}" width="7" height="28" rx="1" fill="${i > 4 ? C.ember : i > 2 ? C.amber : C.sand}"/>`;
-  }
-
-  // Clear space under the card keeps the text off it when it stacks on phones.
-  svg('profile', {
-    w: W,
-    h: H + 32,
-    title:
-      'Player profile. Name: Mir Hamza Hasan. Base: Dubai, UAE. Class: builder and engineer. Mode: ship fast, learn faster. Focus: AI, games and Web3. Energy: happy game-dev chaos.',
-    css: `.m{transform-box:fill-box;transform-origin:50% 100%;animation:m 1s ease-in-out infinite alternate}@keyframes m{from{transform:scaleY(.25)}to{transform:scaleY(1)}}.s{animation:s 6s ease-in-out infinite}@keyframes s{0%{transform:translateX(-260px)}45%,100%{transform:translateX(${W + 260}px)}}`,
-    defs:
-      skyGradient('sky') +
-      `<linearGradient id="sheen"><stop offset="0" stop-color="${C.ember}" stop-opacity="0"/><stop offset=".5" stop-color="${C.sand}"/><stop offset="1" stop-color="${C.ember}" stop-opacity="0"/></linearGradient>` +
-      `<clipPath id="frame"><rect width="${W}" height="${H}" rx="24"/></clipPath>`,
-    body:
-      ground(W, H) +
-      `<g clip-path="url(#frame)">` +
-      text('Player profile', { font: F.display, size: 54, x: 40, y: 76, fill: C.sand }) +
-      `<rect class="s motion-only" x="0" y="0" width="240" height="4" fill="url(#sheen)"/>` +
-      body +
-      meter +
-      `</g>`,
-  });
-}
+import { C, F, ground, n, skyGradient, svg, text, widthOf, wrap } from './lib.mjs';
+import { chain, gameLevel, hero, profile } from './scenes.mjs';
+import { SPRITE_CSS, heroRun } from './sprites.mjs';
 
 /* ---------- Four panels, each a small machine that runs ---------- */
 function focus() {
@@ -289,10 +29,10 @@ function focus() {
       const delay = n(i * (cycle / sats.length));
       o += `<line x1="${cx}" y1="${cy}" x2="${cx + dx}" y2="${cy + dy}" stroke="${C.dusk}" stroke-width="2"/>`;
       o += `<circle cx="${cx + dx}" cy="${cy + dy}" r="17" fill="${C.plum}" stroke="${C.dusk}" stroke-width="2"/>`;
-      o += `<circle class="aiOn" style="animation-delay:${delay}s" cx="${cx + dx}" cy="${cy + dy}" r="17" fill="${C.amber}"/>`;
+      o += `<circle class="aiOn calm" style="animation-delay:${delay}s" cx="${cx + dx}" cy="${cy + dy}" r="17" fill="${C.amber}"/>`;
       o += `<circle class="aiP motion-only" style="animation-delay:${delay}s;--x:${dx}px;--y:${dy}px" cx="${cx}" cy="${cy}" r="6" fill="${C.sand}"/>`;
     });
-    o += `<circle class="aiHub" cx="${cx}" cy="${cy}" r="30" fill="${C.ember}"/>`;
+    o += `<circle class="aiHub calm" cx="${cx}" cy="${cy}" r="30" fill="${C.ember}"/>`;
     o += `<path fill="${C.mist}" d="M${cx} ${cy - 15}l4 11 11 4-11 4-4 11-4-11-11-4 11-4z"/>`;
     return o;
   };
@@ -349,7 +89,7 @@ function focus() {
         o += `<rect class="job motion-only" style="animation-delay:${delay}s" x="${from - 7}" y="${y - 7}" width="14" height="14" rx="3"/>`;
       }
       o += `<rect x="256" y="${y - 22}" width="78" height="44" rx="8" fill="${C.plum}" stroke="${C.dusk}" stroke-width="2"/>`;
-      o += `<rect class="wk" style="animation-delay:${n(i * 0.53)}s" x="256" y="${y - 22}" width="78" height="44" rx="8" fill="${C.ember}"/>`;
+      o += `<rect class="wk calm" style="animation-delay:${n(i * 0.53)}s" x="256" y="${y - 22}" width="78" height="44" rx="8" fill="${C.ember}"/>`;
     });
     for (let i = 0; i < 4; i++) {
       o += `<rect x="58" y="${48 + i * 36}" width="60" height="28" rx="5" fill="${i ? C.dusk : C.amber}"/>`;
@@ -516,7 +256,7 @@ function cta() {
     w: W,
     h: H,
     title: `Open to AI, backend, Web3, game tech and automation projects. ${copy} Book an intro call.`,
-    css: `.l{animation:l 6s cubic-bezier(.5,0,.3,1) infinite both}@keyframes l{0%{stroke-dashoffset:1}55%,100%{stroke-dashoffset:0}}
+    css: `${SPRITE_CSS}.l{animation:l 6s cubic-bezier(.5,0,.3,1) infinite both}@keyframes l{0%{stroke-dashoffset:1}55%,100%{stroke-dashoffset:0}}
 .r{opacity:0;animation:r 6s cubic-bezier(.5,0,.3,1) infinite both}@keyframes r{0%{transform:translateX(56px);opacity:1}55%{transform:translateX(${btnX}px);opacity:1}57%,100%{transform:translateX(${btnX}px);opacity:0}}
 .pop{transform-box:fill-box;transform-origin:center;animation:p 6s ease-out infinite both}@keyframes p{0%,54%{transform:none}60%{transform:scale(1.05)}68%,100%{transform:none}}`,
     defs:
@@ -528,8 +268,8 @@ function cta() {
       head +
       text(copy, { font: F.body, size: 29, x: 56, y: 96 + lines.length * 76 - 18, fill: C.haze }) +
       `<path d="M56 ${lineY}H${btnX}" stroke="${C.dusk}" stroke-width="3"/>` +
-      `<path class="l" d="M56 ${lineY}H${btnX}" pathLength="1" stroke-dasharray="1 1" stroke="url(#h)" stroke-width="4"/>` +
-      `<g class="r motion-only"><rect x="-8" y="${lineY - 8}" width="16" height="16" rx="3" fill="${C.mist}"/></g>` +
+      `<path class="l calm" d="M56 ${lineY}H${btnX}" pathLength="1" stroke-dasharray="1 1" stroke="url(#h)" stroke-width="4"/>` +
+      `<g class="r motion-only"><g transform="translate(0 ${lineY})">${heroRun(3)}</g></g>` +
       `<g class="pop"><rect x="${btnX}" y="${lineY - 34}" width="${btnW}" height="68" rx="16" fill="url(#g)"/>` +
       text(label, { font: F.medium, size: 29, x: btnX + btnW / 2, y: lineY + 10, anchor: 'middle', fill: C.night }) +
       `</g>`,
@@ -538,6 +278,8 @@ function cta() {
 
 hero();
 profile();
+gameLevel();
+chain();
 focus();
 await stack();
 buttons();
